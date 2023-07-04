@@ -1,0 +1,75 @@
+spring:
+  data:
+    redis:
+      host: redis-13325.c232.us-east-1-2.ec2.cloud.redislabs.com
+      port: 13325
+      password: dqyFriVSLw1z0iPYUI6cde9lMKo2tyfV
+      database: 0
+
+  rabbitmq:
+    host: mustang.rmq.cloudamqp.com
+    port: 5672
+    username: egcfxvyq
+    password: 9nA4QiB-QlzS-KCzrFu4B73lPjGcYnj2
+    virtual-host: egcfxvyq
+    queue:
+      name: test-queue
+      name1: test-queue1
+      name2: test-queue2
+      name3: test-queue3
+      dead-letter-exchange: dead-letter-exchange
+      dead-letter-routing-key: dead-letter-routing-key
+      ttl: 60000
+      max-length: 1000
+      max-length-bytes: 1000
+      overflow: reject-publish
+      master-locator: min-masters
+    exchange:
+      name: my-exchange
+      type: FANOUT
+      durable: false
+      auto-delete: false
+    listener:
+      simple:
+        concurrency: 1
+        max-concurrency: 1
+        prefetch: 1
+        retry:
+          enabled: true
+          max-attempts: 3
+          initial-interval: 1s
+          max-interval: 5s
+          multiplier: 2
+          stateless: true
+        default-requeue-rejected: false
+        acknowledge-mode: auto #自动确认消息
+        transaction-size: 1
+        auto-startup: true
+        missing-queues-fatal: true
+        durable: false
+        auto-delete: false
+        exclusive: false
+        consumer-arguments:
+          x-priority: 1
+          x-max-priority: 10
+          x-queue-type: classic
+          x-single-active-consumer: false
+          x-dead-letter-exchange: dead-letter-exchange
+          x-dead-letter-routing-key: dead-letter-routing-key
+          x-message-ttl: 60000
+          x-expires: 60000
+          x-max-length: 1000
+          x-max-length-bytes: 1000
+          x-overflow: reject-publish
+          x-queue-master-locator: min-masters
+
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+
+
