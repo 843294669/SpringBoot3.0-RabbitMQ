@@ -3,7 +3,7 @@ package com.example.rabbit.topic;
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class TopicConsumer {
 
     @RabbitHandler

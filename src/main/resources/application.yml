@@ -31,9 +31,9 @@ spring:
       auto-delete: false
     listener:
       simple:
-        concurrency: 1
-        max-concurrency: 1
-        prefetch: 1
+        concurrency: 1  #单个listener并发 (取决于服务器核心数)
+        max-concurrency: 1  #消费者最大并发度(所有监听的并发度)
+        prefetch: 1  #qos(吞吐量) 内存中积压的消息数量（占用内存）
         retry:
           enabled: true
           max-attempts: 3
@@ -42,7 +42,8 @@ spring:
           multiplier: 2
           stateless: true
         default-requeue-rejected: false
-        acknowledge-mode: auto #自动确认消息
+        #acknowledge-mode: auto #自动确认消息
+        acknowledge-mode: manual #手动确认消息
         transaction-size: 1
         auto-startup: true
         missing-queues-fatal: true

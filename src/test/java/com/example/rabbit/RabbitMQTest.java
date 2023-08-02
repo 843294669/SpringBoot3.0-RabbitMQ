@@ -6,15 +6,13 @@ import com.example.rabbit.topic.TopicProducer;
 import com.example.rabbit.workqueues.WorkQueuesProducer;
 import org.junit.jupiter.api.Test;
 import org.springframework.amqp.core.AmqpAdmin;
+import org.springframework.amqp.core.Message;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 public class RabbitMQTest {
 
-    @Value("${spring.rabbitmq.queue.name}")
-    String queueName;
     @Autowired
     Producer producer;
     @Autowired
@@ -28,7 +26,8 @@ public class RabbitMQTest {
 
     @Test
     public void testSimple() {
-        producer.produce("Hello World");
+        Message message = new Message("Hello World".getBytes());
+        producer.produce(message);
     }
 
     @Test
